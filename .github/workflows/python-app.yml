@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -24,24 +25,19 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest twine sonar-scanner  # Add SonarQube scanner and other required tools
+        pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Lint with flake8
       run: |
+        # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with pytest
       run: |
         pytest
-
-    - name: SonarQube Analysis
-      run: |
-        sonar-scanner \
-          -Dsonar.login=${{ secrets.SONARQUBE_LOGIN }} \
-          -Dsonar.projectBaseDir=${{ github.workspace }} \
-          -Dsonar.properties=./sonar/sonar.properties
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,11 +48,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Upload to Nexus
+      - name: Deploy to Production
         run: |
-          twine upload --repository-url ${{ secrets.NEXUS_REPO_URL }} dist/*  # Upload package to Nexus
-
-      - name: Deploy to Tomcat
-        run: |
-          scp -i ${{ secrets.SSH_PRIVATE_KEY }} myapp.war user@your-tomcat-server:/path/to/tomcat/webapps/
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} user@your-tomcat-server 'systemctl restart tomcat'
+          echo "Starting deployment..."
+          # Replace this echo with actual deployment commands
+          # For example, run your deployment scripts or commands here
