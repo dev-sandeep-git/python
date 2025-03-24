@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "calculator-python"
+version = "1.0.0"
+description = "A simple calculator Python project"
+authors = ["Your Name <youremail@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pytest = "^7.0.0"
+coverage = "^6.0.0"
+twine = "^4.0.0"
+Flask = "^2.1.0"  # Only if you're using Flask for web deployment
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.0"  # Optional: for linting
+black = "^22.0"    # Optional: for code formatting
+pytest-cov = "^3.0.0"  # Optional: pytest plugin for coverage
+sonar-scanner-cli = "^4.7.0"  # Optional: SonarQube scanner for Python (if needed)
+
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
