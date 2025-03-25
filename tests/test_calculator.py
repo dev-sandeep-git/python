@@ -1,11 +1,11 @@
 import sys
 import os
-
-# Add the parent directory to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import unittest
-from calculator import Calculator  # Ensure the correct path
+
+# Add the 'src' directory to the Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
+from calculator import Calculator  # Import the Calculator class from src
 
 class TestCalculator(unittest.TestCase):
     
@@ -28,3 +28,4 @@ class TestCalculator(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
