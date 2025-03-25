@@ -1,38 +1,24 @@
 pipeline {
     agent any
-
     environment {
-        SONARQUBE = 'SonarQubeServer'  // This should match the name of your SonarQube server in Jenkins
+        PYTHON = tool name: 'python3'
     }
-
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                checkout scm
+                git 'https://github.com/dev-ajay-git/python-calculator.git'
             }
         }
-
-        stage('Install Dependencies') {
+  stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh '${PYTHON}/usr/bin/python3 -m pip install -r requirements.txt'
             }
         }
-
-        stage('Run Tests') {
+stage('Run Tests') {
             steps {
-                sh 'pytest tests/'
-            }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    // Set SonarQube environment variable
-                    withSonarQubeEnv('SonarQubeServer') {
-                        sh 'sonar-scanner'
-                    }
-                }
+                sh '${PYTHON}/usr/bin/python3 -m pytest tests/'
             }
         }
     }
+
 }
