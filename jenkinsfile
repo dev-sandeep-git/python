@@ -6,17 +6,23 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                https://github.com/dev-sandeep-git/python.git
+                // Use the Git command to clone the repository
+                git 'https://github.com/dev-sandeep-git/python.git'
             }
         }
-  stage('Install Dependencies') {
+        
+        stage('Install Dependencies') {
             steps {
+                // Install dependencies from requirements.txt
                 sh '${PYTHON}/usr/bin/python3 -m pip install -r requirements.txt'
             }
         }
-stage('Run Tests') {
+        
+        stage('Run Tests') {
             steps {
+                // Run tests using pytest
                 sh '${PYTHON}/usr/bin/python3 -m pytest tests/'
             }
         }
     }
+}
