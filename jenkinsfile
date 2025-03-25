@@ -1,42 +1,38 @@
 pipeline {
     agent any
+
     environment {
-        PYTHON = tool name: 'python'
+        SONARQUBE = 'SonarQubeServer'  // This should match the name of your SonarQube server in Jenkins
     }
+
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/dev-sandeep-git/python.git'
+                checkout scm
             }
         }
-           stage('Install Dependencies') {
+
+        stage('Install Dependencies') {
             steps {
-                sh '${PYTHON}/usr/bin/python3 -m pip install -r requirements.txt'
+                sh 'pip install -r requirements.txt'
             }
         }
-            stage('Run Tests') {
-             steps {
-                sh '${PYTHON}/usr/bin/python3 -m pytest tests/'
+
+        stage('Run Tests') {
+            steps {
+                sh 'pytest tests/'
             }
         }
- // Add SonarQube analysis stage
+
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    // Run SonarQube analysis
-                    withSonarQubeEnv(SONARQUBE) {
-                        sh '''
-                            ${PYTHON}/usr/bin/python3 -m pip install sonar-scanner
-                            sonar-scanner \
-                                -Dsonar.projectKey=your_project_key \
-                                -Dsonar.sources=src \
-                                -Dsonar.tests=tests \
-                                -Dsonar.python.coverage.reportPaths=coverage.xml
-                        '''
+                    // Set SonarQube environment variable
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh 'sonar-scanner'
                     }
                 }
             }
         }
-
-        }
+    }
 }
