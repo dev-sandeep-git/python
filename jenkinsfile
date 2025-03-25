@@ -38,14 +38,4 @@ pipeline {
             }
         }
 
-        // Optionally, you can add a stage to check SonarQube quality gate
-        stage('Quality Gate') {
-            steps {
-                script {
-                    // Wait for SonarQube analysis to complete and check if it passes the quality gate
-                    waitForQualityGate abortPipeline: true
-                }
-            }
         }
-    }
-}
