@@ -27,10 +27,9 @@ pipeline {
         stage('Sonar Test') {
             steps {
                 // Run tests using pytest
-                sh '/opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner
+                sh '/opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner'
             }
         }
     }
 }
-}
-}
+
