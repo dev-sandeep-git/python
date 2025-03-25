@@ -19,6 +19,33 @@ pipeline {
                 sh '${PYTHON}/usr/bin/python3 -m pytest tests/'
             }
         }
-     }
+ // Add SonarQube analysis stage
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Run SonarQube analysis
+                    withSonarQubeEnv(SONARQUBE) {
+                        sh '''
+                            ${PYTHON}/usr/bin/python3 -m pip install sonar-scanner
+                            sonar-scanner \
+                                -Dsonar.projectKey=your_project_key \
+                                -Dsonar.sources=src \
+                                -Dsonar.tests=tests \
+                                -Dsonar.python.coverage.reportPaths=coverage.xml
+                        '''
+                    }
+                }
+            }
+        }
 
+        // Optionally, you can add a stage to check SonarQube quality gate
+        stage('Quality Gate') {
+            steps {
+                script {
+                    // Wait for SonarQube analysis to complete and check if it passes the quality gate
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+    }
 }
