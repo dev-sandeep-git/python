@@ -1,12 +1,11 @@
-import unittest
 import sys
 import os
 
-# Adding the parent directory (where calculator.py resides) to the system path
+# Add the parent directory to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Import the Calculator class
-from calculator import Calculator
+import unittest
+from calculator import Calculator  # Ensure the correct path
 
 class TestCalculator(unittest.TestCase):
     
