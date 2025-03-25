@@ -1,4 +1,11 @@
 import unittest
+import sys
+import os
+
+# Adding the parent directory (where calculator.py resides) to the system path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Import the Calculator class
 from calculator import Calculator
 
 class TestCalculator(unittest.TestCase):
@@ -22,4 +29,3 @@ class TestCalculator(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
