@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/dev-ajay-git/python-calculator.git'
+                https://github.com/dev-sandeep-git/python.git
             }
         }
   stage('Install Dependencies') {
