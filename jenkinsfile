@@ -9,6 +9,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/dev-sandeep-git/python.git'
             }
         }
+           stage('Install Dependencies') {
+            steps {
+                sh '${PYTHON}/usr/bin/python3 -m pip install -r requirements.txt'
+            }
+        }
      }
 
 }
