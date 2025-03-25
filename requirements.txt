@@ -1,6 +1,5 @@
 pytest==7.0.0
 coverage==6.0.0
 twine==4.0.0
-sonar-scanner-cli==4.7.0  # This is an optional requirement if you want to install SonarQube scanner in Python
 Flask==2.1.0  # Only needed if you are using Flask to create a web app for Tomcat deployment
 
