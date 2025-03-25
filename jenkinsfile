@@ -30,6 +30,11 @@ pipeline {
                 sh '/opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner'
             }
         }
+            stage('Deploy to nexus') {
+            steps {
+                sh 'mvn deploy'
+            }
+        }
     }
 }
 
