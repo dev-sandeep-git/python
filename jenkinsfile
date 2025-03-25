@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    environment {
+        PYTHON = tool name: 'python3'
+    }
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/dev-ajay-git/python-calculator.git'
+            }
+        }
+    }
+}
