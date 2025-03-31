@@ -1,10 +1,10 @@
 pipeline {
     agent { label 'java' }  // This means the pipeline will run on a node labeled 'java'
-    stages {
-        stage('Checkout') {
+     stages {
+        stage('Clone Repository') {
             steps {
-                // Checkout the code from the repository
-                checkout scm
+                // Use the Git command to clone the repository
+                git 'https://github.com/dev-sandeep-git/python.git'
             }
         }
         }
