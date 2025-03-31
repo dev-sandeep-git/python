@@ -4,7 +4,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Use the Git command to clone the repository
-                git 'https://github.com/dev-sandeep-git/python.git'
+                git branch: 'main', url: 'https://github.com/dev-sandeep-git/python.git'
             }
         }
         }
