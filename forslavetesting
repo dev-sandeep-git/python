@@ -1,0 +1,11 @@
+pipeline {
+    agent { label 'java' }  // This means the pipeline will run on a node labeled 'java'
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the repository
+                checkout scm
+            }
+        }
+        }
+        }
