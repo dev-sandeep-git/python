@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'slave1' }  // This means the pipeline will run on a node labeled 'java'
+    agent { label 'slave-1' }  // This means the pipeline will run on a node labeled 'java'
      stages {
         stage('Clone Repository') {
             steps {
